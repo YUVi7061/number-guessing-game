@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Number Guessing Game</title>
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			font-family: sans-serif;
+			color: aliceblue;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			overflow: hidden;
+		}
+		video {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			min-width: 100%;
+			min-height: 100%;
+			width: auto;
+			height: auto;
+			z-index: -1;
+			transform: translate(-50%, -50%);
+			background-size: cover;
+			opacity: 89%;
+		}
+		.content {
+			position: relative;
+			text-align: center;
+			z-index: 1;
+			padding: 20px;
+			border-radius: 20px;
+			background-color: transparent;
+		}
+		.content:hover {
+			background-color: black;
+			opacity: 90%;
+		}
+		h1 {
+			margin-bottom: 20px;
+			color: beige;
+		}
+		p {
+			margin-bottom: 20px;
+			color: beige;
+			font-weight: 900;
+		}
+		.form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.guessField, .guessSubmit, .resetGame {
+			background-color: transparent;
+			color: beige;
+			border: 1px solid beige;
+			padding: 10px;
+			margin: 5px;
+			border-radius: 5px;
+			width: 200px;
+			text-align: center;
+		}
+
+		.guessField:hover, .guessSubmit:hover, .resetGame:hover {
+			background-color: beige;
+			border-color: white;
+			color: black;
+		}
+		.guessSubmit, .resetGame {
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<video autoplay muted loop>
+		<source src="https://cdn.pixabay.com/video/2022/04/09/113368-697718069_large.mp4" type="video/mp4">
+		Your browser does not support the video tag.
+	</video>
+
+	<div class="content">
+		<h1>Guess The Number</h1>
+		<p>We have selected a random number between 1 - 100.<br>Let's See If You Can Guess It.</p>
+		<div class="form">
+			<label for="guessField">Enter a guess:</label>
+			<input type="text" id="guessField" placeholder="Enter Your Number" class="guessField">
+			<input type="button" value="Submit guess" class="guessSubmit" id="submitguess">
+			<input type="button" value="Reset Game" class="resetGame" id="resetgame">
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var y = Math.floor(Math.random() * 100 + 1);
+		var guessCount = 1;
+
+		document.getElementById("submitguess").onclick = function() {
+			var x = document.getElementById("guessField").value;
+
+			if (x == y) {
+				alert("CONGRATULATIONS!!! YOU GUESSED IT RIGHT IN " + guessCount + " GUESSES");
+			} else if (x > y) {
+				guessCount++;
+				alert("OOPS SORRY!! TRY A SMALLER NUMBER");
+			} else {
+				guessCount++;
+				alert("OOPS SORRY!! TRY A GREATER NUMBER");
+			}
+		}
+
+		document.getElementById("resetgame").onclick = function() {
+			y = Math.floor(Math.random() * 100 + 1);
+			guessCount = 1;
+			document.getElementById("guessField").value = '';
+			alert("The game has been reset. Try guessing the new number!");
+		}
+	</script>
+</body>
+</html>
